@@ -248,15 +248,16 @@ const Mutation = new GraphQLObjectType({
         return myOffer;
       },
     },
-    // deleteOffer: {
-    //     type: OfferType,
-    //     args: {
-    //         id: {type: GraphQLID}
-    //     },
-    //     async resolve(parent, args) {
-    //         await Offer.deleteOne()
-    //     }
-    // }
+    deleteOffer: {
+      type: OfferType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const offer = await Offer.findOneAndDelete({ _id: args.id });
+        return offer;
+      },
+    },
   },
 });
 
