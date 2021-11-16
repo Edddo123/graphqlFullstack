@@ -1,0 +1,29 @@
+type Buyer {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  location: String
+  posts: [BuyerPost]
+}
+
+type BuyerPost {
+  id: ID!
+  propertyType: String
+  price: Int
+}
+
+type Query {
+  buyer(id: ID!): Buyer
+  buyers: [Buyer]
+}
+
+
+type Mutation {
+  addBuyer(
+    name: String!
+    email: String!
+    password: String!
+    location: String!
+  ): Buyer
+}
