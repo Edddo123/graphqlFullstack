@@ -1,3 +1,4 @@
+import { forwardRef, Inject } from '@nestjs/common';
 import {
   Resolver,
   Query,
@@ -8,6 +9,7 @@ import {
 } from '@nestjs/graphql';
 import { BuyerService } from '../buyer/buyer.service';
 import { CreateBuyerPostDto } from './dto/create-buyer-post.dto';
+import { BuyerPost } from './post.entity';
 import { PostService } from './post.service';
 
 @Resolver('BuyerPost')
@@ -23,12 +25,16 @@ export class PostResolver {
 
   @Query('posts')
   async getPosts() {
-    return await this.postService.findAll;
+    return await this.postService.find();
+  }
+
+  @ResolveField('buyer')
+  async getBuyer(@Parent() post: BuyerPost) {
+    return await this.buyerService.findOneById(post.buyer.id);
   }
 
   @Mutation()
   async addBuyerPost(@Args() post: CreateBuyerPostDto) {
-    console.log('here', post);
     return await this.postService.create(post);
   }
 }

@@ -2,6 +2,7 @@ type BuyerPost {
   id: ID!
   propertyType: String
   price: Int
+  buyer: Buyer
 }
 
 type Buyer {
@@ -19,5 +20,5 @@ type Query {
 }
 
 type Mutation {
-  addBuyerPost(propertyType: String!, price: Int!, buyerId: ID!): BuyerPost
+  addBuyerPost(propertyType: String!, price: Int!, buyer: ID!): BuyerPost
 }

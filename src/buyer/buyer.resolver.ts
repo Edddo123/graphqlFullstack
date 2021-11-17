@@ -1,4 +1,12 @@
-import { Resolver, Query, Args, ResolveField, Parent, Mutation } from '@nestjs/graphql';
+import { forwardRef, Inject } from '@nestjs/common';
+import {
+  Resolver,
+  Query,
+  Args,
+  ResolveField,
+  Parent,
+  Mutation,
+} from '@nestjs/graphql';
 import { PostService } from 'src/post/post.service';
 import { Buyer } from './buyer.entity';
 import { BuyerService } from './buyer.service';
@@ -17,21 +25,19 @@ export class BuyerResolver {
   }
 
   @Query('buyers')
-  async getBuyers() { 
+  async getBuyers() {
     return await this.buyerService.findAll();
-  } 
-  
-  @ResolveField('posts')
-  async getPosts(@Parent() buyer: Buyer) { 
-    return await this.postService.findAll(buyer);
-  }
-    
-  @Mutation()
-  async addBuyer(@Args() buyer: CreateBuyerDto) {  
-    return this.buyerService.addBuyer(buyer)
   }
 
- 
+  @ResolveField('posts')
+  async getPosts(@Parent() buyer: Buyer) {
+    return await this.postService.findAll(buyer);
+  }
+
+  @Mutation()
+  async addBuyer(@Args() buyer: CreateBuyerDto) {
+    return this.buyerService.addBuyer(buyer);
+  }
 }
 
 //  buyers(): Buyer[]

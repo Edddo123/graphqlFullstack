@@ -1,12 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PostService } from 'src/post/post.service';
 import { Repository } from 'typeorm';
 import { Buyer } from './buyer.entity';
 import { CreateBuyerDto } from './dto/create-buyer.dto';
 
 @Injectable()
 export class BuyerService {
-  constructor(@InjectRepository(Buyer) private repo: Repository<Buyer>) {}
+  constructor(
+    @InjectRepository(Buyer)
+    private repo: Repository<Buyer>,
+  ) {}
   async findOneById(id: string) {
     return await this.repo.findOne(id);
   }

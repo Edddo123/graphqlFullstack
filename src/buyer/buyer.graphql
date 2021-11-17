@@ -11,6 +11,7 @@ type BuyerPost {
   id: ID!
   propertyType: String
   price: Int
+  buyer: Buyer
 }
 
 type Query {

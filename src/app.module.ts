@@ -14,9 +14,9 @@ import { APP_PIPE } from '@nestjs/core';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: `.env` }),
-    GraphQLModule.forRoot({
-      playground: true,
-      typePaths: ['./**/*.graphql'],
+    GraphQLModule.forRoot({ 
+      playground: true,  
+      typePaths: ['./**/*.graphql'], 
       definitions: { 
         path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',

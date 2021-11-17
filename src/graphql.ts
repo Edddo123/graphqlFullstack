@@ -20,6 +20,7 @@ export class BuyerPost {
     id: string;
     propertyType?: Nullable<string>;
     price?: Nullable<number>;
+    buyer?: Nullable<Buyer>;
 }
 
 export abstract class IQuery {
@@ -35,7 +36,7 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract addBuyer(name: string, email: string, password: string, location: string): Nullable<Buyer> | Promise<Nullable<Buyer>>;
 
-    abstract addBuyerPost(propertyType: string, price: number, buyerId: string): Nullable<BuyerPost> | Promise<Nullable<BuyerPost>>;
+    abstract addBuyerPost(propertyType: string, price: number, buyer: string): Nullable<BuyerPost> | Promise<Nullable<BuyerPost>>;
 }
 
 type Nullable<T> = T | null;
